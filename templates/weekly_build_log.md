@@ -4,18 +4,18 @@
 **Project:** DocChat / Mini-Recsys / Vision
 
 ## Shipped
-- 
+-
 
 ## Metrics
-- Latency p95: 
-- nDCG@10 / accuracy: 
-- Throughput: 
+- Latency p95:
+- nDCG@10 / accuracy:
+- Throughput:
 
 ## Clip/Screenshot
 (link)
 
 ## What broke & fix
-- 
+-
 
 ## Next week
-- 
+-
