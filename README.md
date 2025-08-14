@@ -1,3 +1,8 @@
+[![CI](https://github.com/patelhr/ai-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/patelhr/ai-lab/actions/workflows/ci.yml)
+[![Docs](https://github.com/patelhr/ai-lab/actions/workflows/docs.yml/badge.svg)](https://github.com/patelhr/ai-lab/actions/workflows/docs.yml)
+[![Release](https://img.shields.io/github/v/release/patelhr/ai-lab)](https://github.com/patelhr/ai-lab/releases)
+
+
 # ai-lab
 
 A minimal, production-minded starter repo for your AI learning journey.
