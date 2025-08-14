@@ -1,0 +1,6 @@
+{
+  "name": "ai-lab",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "postCreateCommand": "pip install -e .[dev,rag,recsys,docs] && pre-commit install",
+  "features": {"ghcr.io/devcontainers/features/common-utils:2": {}}
+}

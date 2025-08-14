@@ -1,0 +1,54 @@
+[project]
+name = "ai-lab"
+version = "0.1.0"
+description = "Minimal starter for AI engineering with tests, lint, CI, docs, and automations."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name="Hardik"}]
+
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scikit-learn>=1.4",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+    "black>=24.0",
+    "pre-commit>=3.7",
+]
+rag = [
+    "fastapi>=0.111",
+    "uvicorn>=0.29",
+    "faiss-cpu>=1.8",
+    "sentence-transformers>=3.0",
+    "python-dotenv>=1.0",
+    "pydantic>=2.7",
+]
+recsys = [
+    "fastapi>=0.111",
+    "uvicorn>=0.29",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "scikit-learn>=1.4",
+]
+docs = [
+    "mkdocs>=1.6",
+    "mkdocs-material>=9.5"
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]  # handled by black

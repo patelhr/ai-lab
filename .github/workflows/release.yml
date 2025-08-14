@@ -1,0 +1,41 @@
+name: release
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+      - name: Lint
+        run: ruff check .
+      - name: Format check
+        run: black --check .
+      - name: Tests
+        run: pytest -q
+      - name: Tag & release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const now = new Date();
+            const y = now.getUTCFullYear();
+            const m = String(now.getUTCMonth()+1).padStart(2,'0');
+            const d = String(now.getUTCDate()).padStart(2,'0');
+            const base = `v${y}.${m}.${d}`;
+            const tags = await github.paginate(github.rest.repos.listTags, { owner: context.repo.owner, repo: context.repo.repo, per_page: 100 });
+            const todays = tags.filter(t => t.name.startsWith(base)).map(t => t.name);
+            const tag = todays.length ? `${base}.${todays.length+1}` : base;
+            try {
+              await github.rest.git.createRef({ owner: context.repo.owner, repo: context.repo.repo, ref: `refs/tags/${tag}`, sha: context.sha });
+            } catch (e) { if (e.status !== 422) throw e; }
+            await github.rest.repos.createRelease({ owner: context.repo.owner, repo: context.repo.repo, tag_name: tag, generate_release_notes: true });

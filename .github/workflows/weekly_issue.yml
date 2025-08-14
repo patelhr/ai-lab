@@ -1,0 +1,26 @@
+name: weekly-build-issue
+on:
+  schedule:
+    - cron: '30 15 * * 5'  # Fri 21:00 IST = 15:30 UTC
+  workflow_dispatch:
+jobs:
+  open_issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Create/Update Weekly Build Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const now = new Date();
+            const ist = new Date(now.getTime() + (5.5 * 60 * 60 * 1000));
+            const y = ist.getUTCFullYear();
+            const m = String(ist.getUTCMonth()+1).padStart(2,'0');
+            const d = String(ist.getUTCDate()).padStart(2,'0');
+            const title = `Weekly Build Log: ${y}-${m}-${d}`;
+            const body = `Auto-created weekly build log. Use templates/weekly_build_log.md.\n\n- [ ] Post on LinkedIn\n- [ ] Update docs/links.md`;
+            const { data: issues } = await github.rest.search.issuesAndPullRequests({ q: `repo:${context.repo.owner}/${context.repo.repo} is:issue is:open in:title \"${title}\"` });
+            if (issues.total_count === 0) {
+              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body, labels: ['build-log'] });
+            }

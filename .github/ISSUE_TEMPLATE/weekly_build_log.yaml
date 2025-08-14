@@ -1,0 +1,29 @@
+name: Weekly Build Log
+description: Track what you shipped this week and the key metric moved.
+title: "Weekly Build Log: <YYYY-MM-DD>"
+labels: ["build-log"]
+body:
+  - type: input
+    id: week
+    attributes:
+      label: Week (YYYY-MM-DD)
+      placeholder: 2025-08-15
+    validations:
+      required: true
+  - type: textarea
+    id: shipped
+    attributes:
+      label: What I shipped
+      description: Bullet list; include metric impact when possible.
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics
+      description: Latency p95 / nDCG@10 / throughput / accuracy
+  - type: textarea
+    id: next
+    attributes:
+      label: Next week
+      description: 1–3 concrete tasks
