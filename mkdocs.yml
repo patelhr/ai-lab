@@ -1,11 +1,12 @@
-site_name: ai-lab docs
+﻿site_name: ai-lab docs
 theme:
   name: material
+docs_dir: docs
 nav:
   - Home: index.md
-  - Roadmap: docs/ROADMAP.md
-  - Checklists: docs/checklists.md
-  - Links: docs/links.md
+  - Roadmap: ROADMAP.md
+  - Checklists: checklists.md
+  - Links: links.md
 markdown_extensions:
   - admonition
   - toc:
