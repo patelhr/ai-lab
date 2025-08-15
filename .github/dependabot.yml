@@ -1,0 +1,27 @@
+version: 2
+updates:
+  # Python packages from pyproject.toml
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"      # or "daily"
+      day: "sunday"
+      time: "06:00"
+    open-pull-requests-limit: 10
+    labels: ["dependencies"]
+    groups:
+      python-deps:
+        patterns: ["*"]
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+      time: "06:00"
+    open-pull-requests-limit: 10
+    labels: ["dependencies","ci"]
+    groups:
+      gh-actions:
+        patterns: ["*"]
