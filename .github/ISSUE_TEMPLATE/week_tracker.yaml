@@ -1,0 +1,21 @@
+name: Week Tracker
+description: Plan and track this week’s sprint
+title: "Week <N> Tracker — <Theme>"
+labels: ["week"]
+body:
+  - type: textarea
+    id: goals
+    attributes:
+      label: Goals
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics to watch
+  - type: textarea
+    id: demo
+    attributes:
+      label: Demo checklist

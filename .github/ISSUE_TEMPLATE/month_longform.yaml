@@ -1,0 +1,13 @@
+name: Monthly Longform
+description: Plan the longform article
+title: "Monthly Longform: <YYYY-MM>"
+labels: ["longform","docs"]
+body:
+  - type: textarea
+    id: outline
+    attributes:
+      label: Outline
+  - type: input
+    id: link
+    attributes:
+      label: Permalink after publish

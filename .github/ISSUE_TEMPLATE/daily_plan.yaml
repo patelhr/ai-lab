@@ -1,0 +1,24 @@
+name: Daily 90-minute Plan
+description: Track a single 90-minute learning/building block
+title: "Daily Plan: <YYYY-MM-DD>"
+labels: ["daily"]
+body:
+  - type: checkboxes
+    id: steps
+    attributes:
+      label: Minute-by-minute
+      options:
+        - label: 0–10m — make check (fix fast)
+        - label: 10–60m — build atomic task
+        - label: 60–75m — measure & log metric
+        - label: 75–85m — polish (screenshot/gif)
+        - label: 85–90m — commit & push
+  - type: input
+    id: metric
+    attributes:
+      label: Metric logged
+      description: e.g., val acc 0.94; p95 1.2s; nDCG@10 +0.05
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / blockers

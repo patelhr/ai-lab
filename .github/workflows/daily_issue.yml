@@ -1,0 +1,34 @@
+name: daily-plan-issue
+on:
+  schedule:
+    - cron: '0 2 * * *'  # ~07:30 IST
+  workflow_dispatch:
+jobs:
+  open_issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Open daily 90-minute plan issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const now = new Date();
+            const ist = new Date(now.getTime() + (5.5 * 60 * 60 * 1000));
+            const y = ist.getUTCFullYear();
+            const m = String(ist.getUTCMonth()+1).padStart(2,'0');
+            const d = String(ist.getUTCDate()).padStart(2,'0');
+            const title = `Daily Plan: ${y}-${m}-${d}`;
+            const body = `Auto-created daily plan. Use the Daily issue template.\n\n- [ ] 0–10m — make check (fix fast)\n- [ ] 10–60m — build\n- [ ] 60–75m — measure & log metric\n- [ ] 75–85m — polish\n- [ ] 85–90m — commit & push`;
+            const { data } = await github.rest.search.issuesAndPullRequests({
+              q: `repo:${context.repo.owner}/${context.repo.repo} is:issue is:open in:title \"${title}\"`
+            });
+            if (data.total_count === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['daily']
+              });
+            }
